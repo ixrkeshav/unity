@@ -67,19 +67,45 @@ public class ballscript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collis)
     {
-
-        if (collis.transform.CompareTag("brick")){
-      
-
-            int randomchance = Random.Range(1,101);
-            if (randomchance < 20)
+        brickscript brickScript = collis.gameObject.GetComponent<brickscript>();
+        if (collis.transform.CompareTag("brick"))
+        {
+            if (brickScript.hitsToBreak > 1)
             {
-                Instantiate(powerup, collis.transform.position, collis.transform.rotation);
+                brickScript.BreakBrick();
             }
-            Destroy(collis.gameObject);
-            gm.UpdateNumberOfBricks();
-            //count++;
-            gm.UpdateScore(+1);
+            else
+            {
+
+                int randomchance = Random.Range(1, 101);
+                if (randomchance < 20)
+                {
+                    Instantiate(powerup, collis.transform.position, collis.transform.rotation);
+                }
+                Destroy(collis.gameObject);
+                gm.UpdateNumberOfBricks();
+                //count++;
+                gm.UpdateScore(+1);
+            }
+        } if (collis.transform.CompareTag("brickLevel2"))
+        {
+            if (brickScript.hitsToBreak > 1)
+            {
+                brickScript.BreakBrick();
+            }
+            else
+            {
+
+                int randomchance = Random.Range(1, 101);
+                if (randomchance < 20)
+                {
+                    Instantiate(powerup, collis.transform.position, collis.transform.rotation);
+                }
+                Destroy(collis.gameObject);
+                gm.UpdateNumberOfBricks();
+                //count++;
+                gm.UpdateScore(+1);
+            }
         }
     }
 }

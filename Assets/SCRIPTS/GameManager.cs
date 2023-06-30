@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public GameObject gameOverPanel;
     public int numberOfBricks;
+    public Transform[] levels;
+    public int currentLevelIndex = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -55,16 +57,31 @@ public class GameManager : MonoBehaviour
             numberOfBricks--;
             if (numberOfBricks == 0)
             {
-
-                numberOfBricks = 0;
+            if (currentLevelIndex >= levels.Length - 1)
+            {
                 GameOver();
-                print("Test");
-                
+            }
+            else
+            {
+                //    gameOver = true;
+                //    //Invoke("loadlevel()",3f);
+
+                SceneManager.LoadScene("level 2");
+                currentLevelIndex++;
+                }
+
 
             }
        
         
     }
+    //void loadlevel()
+    //{
+    //    currentLevelIndex++;
+    //    Instantiate(levels[currentLevelIndex], Vector2.zero, Quaternion.identity);
+    //    numberOfBricks = GameObject.FindGameObjectsWithTag("brick").Length;
+    //    gameOver = false;
+    //}
 
     void GameOver()
     {
